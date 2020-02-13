@@ -1,0 +1,9 @@
+python-telegram-bot==11.1.0
+toml
+PyGithub
+beautifulsoup4
+urllib3
+requests
+lxml
+peewee
+matrix_client

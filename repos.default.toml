@@ -1,0 +1,233 @@
+# [repos.description_key] # the description must be unique
+# path = "telegramdesktop/tdesktop" # github repo path
+# branch = false # branch name to fetch for commits. "false" will make the bot use the default one
+# hashtag = "tdesktop" # hashtag to attach to the message. If empty or null, no hashtag will be attached
+# commits = true # enable commits job for this repo
+# releases = true # enable releases job for this repo
+# assets = true # send the assets urls for each posted release
+# asset_files = false # send the assets files for each posted release. Ignored if "assets" is false
+# assets_timedelta = 1800 # time to wait after a github release before sending the assets
+# chat_id = -1001109354447 # id of the Telegram chat where to post. Use 0 or "false" if you want to disable Telegram posting for this repo
+# room_id = "!kClxsVwILtADpDvroJ:matrix.org" # id of the Matrix room where to post. Use 0 or "false" if you want to disable Matrix posting for this repo
+
+[repos.tdesktop]
+path = "telegramdesktop/tdesktop"
+branch = false
+hashtag = "tdesktop"
+commits = true
+releases = true
+assets = true
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.androidapp]
+path = "DrKLO/Telegram"
+branch = false
+hashtag = "android"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.iosapp]
+path = "TelegramMessenger/Telegram-iOS"
+branch = false
+hashtag = "telegram_ios"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.ioscore]
+path = "peter-iakovlev/TelegramCore"
+branch = false
+hashtag = "telegramcore"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.iosui]
+path = "peter-iakovlev/TelegramUI"
+branch = false
+hashtag = "telegramui"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.tmacos]
+path = "overtake/TelegramSwift"
+branch = false
+hashtag = "macos"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.tweb]
+path = "zhukov/webogram"
+branch = false
+hashtag = "webogram"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.wpapp]
+path = "wodim/telegram-wp"
+branch = false
+hashtag = "telegram_wp"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.libtgvoip]
+path = "grishka/libtgvoip"
+branch = false
+hashtag = "libtgvoip"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.tdlib]
+path = "tdlib/td"
+branch = false
+hashtag = "tdlib"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.unigram]
+path = "UnigramDev/Unigram"
+branch = false
+hashtag = "unigram"
+commits = true
+releases = false
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.treact]
+path = "evgeny-nadymov/telegram-react"
+branch = false
+hashtag = "webreact"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.walletandroid]
+path = "ton-blockchain/wallet-android"
+branch = false
+hashtag = "walletandroid"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001399225876 # tonwallets
+
+[repos.walletios]
+path = "ton-blockchain/wallet-ios"
+branch = false
+hashtag = "walletios"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001399225876 # tonwallets
+
+[repos.walletdesktop]
+path = "ton-blockchain/wallet-desktop"
+branch = false
+hashtag = "walletdesktop"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001399225876 # tonwallets
+
+[repos.nekogram]
+path = "Nekogram/Nekogram"
+branch = false
+hashtag = ""
+commits = true
+releases = true
+assets = true
+asset_files = true
+assets_timedelta = 300
+chat_id = -1001187572963 # nekogram_releases
+
+[repos.forkgram]
+path = "Forkgram/TelegramAndroid"
+branch = false
+hashtag = "forkgram"
+commits = false
+releases = true
+assets = false
+asset_files = false
+chat_id = 0
+
+[repos.madelineproto]
+path = "danog/MadelineProto"
+branch = false
+hashtag = "madelineproto"
+commits = true
+releases = false
+assets = false
+asset_files = false
+chat_id = -1001188965774 # mtprotoclients
+
+[repos.pyrogram]
+path = "pyrogram/pyrogram"
+branch = false
+hashtag = "pyrogram"
+commits = true
+releases = false
+assets = false
+asset_files = false
+chat_id = -1001188965774 # mtprotoclients
+
+[repos.telethon]
+path = "LonamiWebs/Telethon"
+branch = false
+hashtag = "telethon"
+commits = true
+releases = false
+assets = false
+asset_files = false
+chat_id = -1001188965774 # mtprotoclients
+
+[repos.tgfoss]
+path = "Telegram-FOSS-Team/Telegram-FOSS"
+branch = false
+hashtag = "foss"
+commits = false
+releases = true
+assets = true
+asset_files = true
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.newpipe]
+path = "TeamNewPipe/NewPipe"
+branch = false
+hashtag = ""
+commits = false
+releases = true
+assets = true
+asset_files = true
+assets_timedelta = 600
+chat_id = -1001496311822 # newpipe

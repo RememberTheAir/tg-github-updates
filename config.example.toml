@@ -1,0 +1,38 @@
+[telegram]
+token = "" # CHANGEME
+run_async_workers = 0 # keep at 0
+admins = [23646077] # CHANGEME - users that will be able to use the commands
+exceptions_log = 0 # chat where to log errors. 0 to use the first admin id in "admins"
+
+[matrix]
+enabled = true # enable/disable Matrix posting
+server = "https://matrix.org" # CHANGEME - Matrix server
+username = "" # CHANGEME - Matrix user username
+password = "" # CHANGEME - Matrix user password
+
+[database]
+filename = "betadl.db" # database file
+
+[github]
+access_token = "" # CHANGEME - if this is not empty, username and password are not needed
+user = "" # CHANGEME - GitHub user, not needed if "access_token" is filled
+password = "" # CHANGEME - GitHub password, not needed if "access_token" is filled
+
+[jobs]
+start_after = 0 # how many seconds to wait before starting to run the jobs
+run_every = 300 # jobs frequency in seconds
+
+[jobs.github]
+commits_days_backwards = 3 # when fetching commits, how many days of commits to fetch
+disable_releases = false # disbale the github releases job for all repositories
+disable_commits = false # disbale the github commits job for all repositories
+disable_assets = false # disbale the github assets job for all repositories
+assets_timedelta = 1800 # default time to wait after a github release before sending the assets (used only if a repo doesn't have one)
+test_chat_id = 0 # where to send the messages. Use 0 if not in testing mode
+
+[jobs.beta]
+enabled = true
+url = "https://rink.hockeyapp.net/apps/f972660267c948d2b5d04761f1c1a8f3" # beta's HockeyApp page
+build_number_file = "beta_version.txt" # a txt file where we save the build number of the last uploaded beta
+channel_id = -1001179798461 # CHANGEME - where to send the APK
+notify_channel_id = -1001109354447 # CHANGEME - a chat where the bot is going to link the latest uploaded apk's link. 0 to disable
