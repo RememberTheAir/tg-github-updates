@@ -109,10 +109,10 @@ def releases_job(bot, _):
 
         try:
             Release.get(Release.repository == repo_name, Release.release_id == release.id)
-            logger.info('release %s is already saved in db, continuing to next repo...', release.id)
+            logger.info('release %s (%s) is already saved in db, continuing to next repo...', release.id, release.tag_name)
             continue
         except DoesNotExist:
-            logger.info('release %s is new, saving in db...', release.id)
+            logger.info('release %s (%s) is new, saving in db...', release.id, release.tag_name)
             db_release = Release.create(repository=repo_name, release_id=release.id)
             logger.info('...release record created, github release id: %d', db_release.release_id)
 
