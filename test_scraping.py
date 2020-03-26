@@ -34,6 +34,7 @@ def main(selected_webdriver='pjs'):
     version_xpath_chromium = '//*[@id="app"]/div/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/text()[2]'
     version_xpath_chromium_full = '/html/body/div[2]/div/div/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div/div/div[1]/div[1]'
     version_class_name = '_1qjHBJYex _19ynaVUpx _634PiScnx _1vGSY6Fax l1LdMrFBx _74rbA585x _1id30tvgx'
+    version_class_name_dotted = version_class_name.replace(' _', '._')
 
     if selected_webdriver == 'ff':
         print('FIREFOX DRIVER')
@@ -69,10 +70,13 @@ def main(selected_webdriver='pjs'):
 
     by_tag_name = driver.find_elements_by_tag_name('div')
     print('by tag name:\n', by_tag_name)
-    print('\n'.join(dir(by_tag_name[0])))
-    print([e.text for e in by_tag_name])
+    try:
+        print('\n'.join(dir(by_tag_name[0])))
+        print([e.text for e in by_tag_name])
+    except Exception as e:
+        print('exception:', str(e))
 
-    by_class = driver.find_elements_by_class_name(version_class_name)
+    by_class = driver.find_elements_by_class_name(version_class_name_dotted)
     print('by class:\n', by_class)
 
     # page_html = driver.page_source
