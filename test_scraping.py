@@ -38,6 +38,7 @@ def main(selected_webdriver='pjs'):
 
     if selected_webdriver == 'ff':
         print('FIREFOX DRIVER')
+        # https://github.com/mozilla/geckodriver/releases
 
         # https://stackoverflow.com/a/40931903
         firefox_capabilities = DesiredCapabilities.FIREFOX
@@ -48,20 +49,22 @@ def main(selected_webdriver='pjs'):
         chrome_options.headless = True
 
         # https://stackoverflow.com/a/42122284
-        driver = webdriver.Firefox(executable_path=r'./geckodriver.exe', capabilities=firefox_capabilities, firefox_options=chrome_options)
+        driver = webdriver.Firefox(executable_path=r'./browser_drivers/geckodriver_0.26.0.exe', capabilities=firefox_capabilities, firefox_options=chrome_options)
     elif selected_webdriver == 'chr':
+        # https://chromedriver.storage.googleapis.com/index.html
         print('CHROME DRIVER')
 
         # https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.chrome.webdriver
         chrome_options = webdriver.ChromeOptions()
         chrome_options.headless = True
-        driver = webdriver.Chrome(executable_path='./chromedriver.exe', chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path='./browser_drivers/chromedriver_81.0.4044.69.exe', chrome_options=chrome_options)
     else:  # pjs: phantomJS
         # phantomJS is deprecated, but it works (headless firefox doesn't)
+        # http://phantomjs.org/download.html
         print('PHANTOMJS DRIVER')
 
         # https://towardsdatascience.com/data-science-skills-web-scraping-javascript-using-python-97a29738353f
-        driver = webdriver.PhantomJS(executable_path='./phantomjs.exe')
+        driver = webdriver.PhantomJS(executable_path='./browser_drivers/phantomjs_2.1.1.exe')
 
     driver.get(URL)
 
