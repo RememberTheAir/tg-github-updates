@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import requests
 from github import Github
 from github.GithubException import UnknownObjectException
+from github import GitRelease
 from telegram.error import BadRequest
 from telegram.error import TelegramError
 from telegram import ParseMode
@@ -101,11 +102,29 @@ def releases_job(bot, _):
             continue
 
         try:
-            release = repo.get_releases()[0]
+            releases = repo.get_releases()
         except Exception as e:
             error_string = str(e)
             logger.error('error while fetching repo %s releases: %s (continuing loop...)', repo_name, error_string)
             continue
+
+        if not releases:
+            logger.info('no releases for this repo, continuing to the next one...')
+            continue
+
+        if len(list(releases)) > 3:
+            # we only need the first three
+            releases = releases[:3]
+
+        # the GitHub API has this weird bug that the most recent release is not always the first one
+        # in the returned list, so we request the 3 most recent releases and find out which one to consider by ourself
+        release: GitRelease = None
+        for r in releases:
+            if not release or r.created_at > release.created_at:
+                # r.published_at can be used too
+                release = r
+
+        logger.info('most recent release among the last three: %s', release.tag_name)
 
         try:
             Release.get(Release.repository == repo_name, Release.release_id == release.id)
