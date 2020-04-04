@@ -45,7 +45,6 @@ else:
 
 NEW_RELEASE_STRING = """<a href="{release_url}">New {repo_name} release</a>: \
 <code>{release_tag}</code> ({channel})
-
 {release_body}
 
 #{hashtag}"""
@@ -149,7 +148,7 @@ def releases_job(bot, _):
         text = NEW_RELEASE_STRING.format(
             release_url=release.html_url,
             release_tag=release.tag_name,
-            release_body=release.body,
+            release_body='\n' + release.body if release.body else '',
             repo_name=repo.full_name,
             channel='beta' if release.prerelease else 'stable',
             assets_download=assets_list_text,
