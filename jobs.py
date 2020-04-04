@@ -107,7 +107,7 @@ def releases_job(bot, _):
             logger.error('error while fetching repo %s releases: %s (continuing loop...)', repo_name, error_string)
             continue
 
-        if not releases:
+        if len(list(releases)) == 0:
             logger.info('no releases for this repo, continuing to the next one...')
             continue
 
