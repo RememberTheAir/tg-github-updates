@@ -314,7 +314,7 @@ def assets_job(bot, _):
         for asset in assets:
             assets_urls_list.append(ASSET_STRING.format(
                 asset_download=asset.browser_download_url,
-                asset_label=asset.label or '-no label-'
+                asset_label=asset.label or 'no label'
             ))
 
         if not assets_urls_list:
