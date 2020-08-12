@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import requests
 from github import Github
 from github.GithubException import UnknownObjectException
+from github import GitRelease
 from telegram.error import BadRequest
 from telegram.error import TelegramError
 from telegram import ParseMode
@@ -44,7 +45,6 @@ else:
 
 NEW_RELEASE_STRING = """<a href="{release_url}">New {repo_name} release</a>: \
 <code>{release_tag}</code> ({channel})
-
 {release_body}
 
 #{hashtag}"""
@@ -101,11 +101,29 @@ def releases_job(bot, _):
             continue
 
         try:
-            release = repo.get_releases()[0]
+            releases = repo.get_releases()
         except Exception as e:
             error_string = str(e)
             logger.error('error while fetching repo %s releases: %s (continuing loop...)', repo_name, error_string)
             continue
+
+        if len(list(releases)) == 0:
+            logger.info('no releases for this repo, continuing to the next one...')
+            continue
+
+        if len(list(releases)) > 3:
+            # we only need the first three
+            releases = releases[:3]
+
+        # the GitHub API has this weird bug that the most recent release is not always the first one
+        # in the returned list, so we request the 3 most recent releases and find out which one to consider by ourself
+        release: GitRelease = None
+        for r in releases:
+            if not release or r.created_at > release.created_at:
+                # r.published_at can be used too
+                release = r
+
+        logger.info('most recent release among the last three: %s', release.tag_name)
 
         try:
             Release.get(Release.repository == repo_name, Release.release_id == release.id)
@@ -130,7 +148,7 @@ def releases_job(bot, _):
         text = NEW_RELEASE_STRING.format(
             release_url=release.html_url,
             release_tag=release.tag_name,
-            release_body=release.body,
+            release_body='\n' + release.body if release.body else '',
             repo_name=repo.full_name,
             channel='beta' if release.prerelease else 'stable',
             assets_download=assets_list_text,
@@ -295,7 +313,7 @@ def assets_job(bot, _):
         for asset in assets:
             assets_urls_list.append(ASSET_STRING.format(
                 asset_download=asset.browser_download_url,
-                asset_label=asset.label or '-no label-'
+                asset_label=asset.label or 'no label'
             ))
 
         if not assets_urls_list:
