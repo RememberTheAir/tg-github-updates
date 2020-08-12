@@ -100,6 +100,16 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
+[repos.tgcalls]
+path = "TelegramMessenger/tgcalls"
+branch = false
+hashtag = "tgcalls"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
 [repos.tdlib]
 path = "tdlib/td"
 branch = false
@@ -161,7 +171,7 @@ asset_files = false
 chat_id = -1001399225876 # tonwallets
 
 [repos.nekogram]
-path = "Nekogram/Nekogram"
+path = "Nekogram/Android"
 branch = false
 hashtag = ""
 commits = true
