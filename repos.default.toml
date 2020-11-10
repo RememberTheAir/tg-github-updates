@@ -120,6 +120,16 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
+[repos.tdlib]
+path = "tdlib/telegram-bot-api"
+branch = false
+hashtag = "botapi"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
 [repos.unigram]
 path = "UnigramDev/Unigram"
 branch = false
