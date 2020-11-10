@@ -120,7 +120,7 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
-[repos.tdlib]
+[repos.botapi]
 path = "tdlib/telegram-bot-api"
 branch = false
 hashtag = "botapi"
