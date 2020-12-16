@@ -5,11 +5,13 @@ import time
 from datetime import datetime
 from datetime import timedelta
 from html import escape
+from typing import List
+
 from lxml import html
 
 from bs4 import BeautifulSoup
 import requests
-from github import Github
+from github import Github, Branch, Repository, Commit as GithubCommit
 from github.GithubException import UnknownObjectException
 from github import GitRelease
 from telegram.error import BadRequest
@@ -184,61 +186,79 @@ def commits_job(bot, _):
         logger.info('>>> loop: commits of %s', repo_desc)
 
         try:
-            repo = g.get_repo(repo_name)
+            repo: Repository = g.get_repo(repo_name)
         except UnknownObjectException as e:
             logger.error('error while getting repo %s: %s', repo_name, str(e))
             continue
 
-        if repo_data.branch:
-            repo = repo.get_branch(repo_data.branch)
+        # if repo_data.branch:
+            # repo: Repository = repo.get_branch(repo_data.branch)
 
-        commits = repo.get_commits(since=from_date)
-        logger.info('fetched %d commits since %s (%d days ago)', len(list(commits)),
-                    from_date.strftime("%Y-%m-%d %H:%M:%S"),
-                    config.jobs.github.commits_days_backwards)
-
-        combined_message = ''
-
-        # reverse commits order
-        commits = [commit for commit in commits]
-        for commit in reversed(commits):
-            try:
-                Commit.get(Commit.repository == repo_name, Commit.sha == commit.sha)
-                logger.info('commit %s is already saved in db, continuing...', commit.sha)
-                continue
-            except DoesNotExist:
-                logger.info('commit %s is new, saving in db...', commit.sha)
-                Commit.create(repository=repo_name, sha=commit.sha)
-
-            single_commit_text = NEW_COMMIT_STRING.format(
-                repo_url=repo.html_url,
-                repo_name=repo.full_name,
-                commit_message=escape(commit.commit.message),
-                commit_url=commit.html_url,
-                commit_sha=commit.sha[:7],
-                # use only the first 7 characters
-                # https://stackoverflow.com/questions/18134627/how-much-of-a-git-sha-is-generally-considered-necessary-to-uniquely-identify-a
-                n_files=len(commit.files),
-                commit_additions=commit.stats.additions,
-                commit_deletions=commit.stats.deletions,
-            )
-
-            if (len(combined_message) + len(single_commit_text)) > MAX_MESSAGE_LENGTH:
-                logger.info('combined text reached max length: sending commit message...')
-                combined_message += '\n\n#{}'.format(repo_data.hashtag)
-                sender.send_message(repo_data, combined_message)
-                combined_message = ''
-
-            combined_message = '{}\n\n{}'.format(combined_message, single_commit_text)
-
-        logger.info('sending commit message after the loop (if not empty)...')
-        if combined_message.strip():
-            combined_message = append_hashtag(combined_message, repo_data.hashtag)
-            sender.send_message(repo_data, combined_message)
+        branches: List[Branch] = list(repo.get_branches())
+        branches_count = len(branches)
+        if branches_count == 1:
+            logger.info('repo has only one branch')
         else:
-            logger.info('...it\'s empty')
+            logger.info('repo has %d one branches: %s', branches_count, ', '.join([b.name for b in branches]))
+            # logger.info('branches urls: %s', repo.branches_url)
 
-        time.sleep(3)
+        for i, branch in enumerate(branches):
+            if i > 0:
+                # I can't figure out how to properly query github for a branch's commit
+                break
+
+            # branch_url = repo.branches_url.replace('{/branch}', branch.name)
+            # branch_path = 'commits/{}'.format(branch.name)
+            # logger.info('getting commits of %s/%s', repo_name, branch.name)
+
+            commits = repo.get_commits(since=from_date)
+            logger.info('fetched %d total commits since %s (%d days ago)', len(list(commits)),
+                        from_date.strftime("%Y-%m-%d %H:%M:%S"),
+                        config.jobs.github.commits_days_backwards)
+
+            combined_message = ''
+
+            # reverse commits order
+            commits: List[GithubCommit] = [commit for commit in commits]
+            for commit in reversed(commits):
+                # print(commit.url, commit.html_url)
+                try:
+                    Commit.get(Commit.repository == repo_name, Commit.branch == None, Commit.sha == commit.sha)
+                    logger.info('commit %s is already saved in db, continuing...', commit.sha)
+                    continue
+                except DoesNotExist:
+                    logger.info('commit %s is new, saving in db...', commit.sha)
+                    Commit.create(repository=repo_name, branch=None, sha=commit.sha)
+
+                single_commit_text = NEW_COMMIT_STRING.format(
+                    repo_url=repo.html_url,
+                    repo_name=repo.full_name,
+                    commit_message=escape(commit.commit.message),
+                    commit_url=commit.html_url,
+                    commit_sha=commit.sha[:7],
+                    # use only the first 7 characters
+                    # https://stackoverflow.com/questions/18134627/how-much-of-a-git-sha-is-generally-considered-necessary-to-uniquely-identify-a
+                    n_files=len(commit.files),
+                    commit_additions=commit.stats.additions,
+                    commit_deletions=commit.stats.deletions,
+                )
+
+                if (len(combined_message) + len(single_commit_text)) > MAX_MESSAGE_LENGTH:
+                    logger.info('combined text reached max length: sending commit message...')
+                    combined_message += '\n\n#{}'.format(repo_data.hashtag)
+                    sender.send_message(repo_data, combined_message)
+                    combined_message = ''
+
+                combined_message = '{}\n\n{}'.format(combined_message, single_commit_text)
+
+            logger.info('sending commit message after the loop (if not empty)...')
+            if combined_message.strip():
+                combined_message = append_hashtag(combined_message, repo_data.hashtag)
+                sender.send_message(repo_data, combined_message)
+            else:
+                logger.info('...it\'s empty')
+
+            time.sleep(3)
 
     logger.info('job finished')
 
