@@ -62,7 +62,7 @@ CAPTION = """<b>{asset_label}</b>
 <b>md5</b>: <code>{md5}</code>
 <b>sha1</b>: <code>{sha1}</code>"""
 
-NEW_COMMIT_STRING = """<a href="{repo_url}">{repo_name}</a> • <a href="{commit_url}">{commit_sha}</a> • <i>{n_files} files, +{commit_additions}/-{commit_deletions}</i>
+NEW_COMMIT_STRING = """<a href="{branch_url}">{repo_name}</a> • <a href="{commit_url}">{commit_sha}</a> • <i>{n_files} files, +{commit_additions}/-{commit_deletions}</i>
 {commit_message}"""
 
 NEW_BETA_CAPTION = """🎉 <b>New Android Beta!</b>
@@ -202,16 +202,17 @@ def commits_job(bot, _):
             logger.info('repo has %d one branches: %s', branches_count, ', '.join([b.name for b in branches]))
             # logger.info('branches urls: %s', repo.branches_url)
 
-        for i, branch in enumerate(branches):
-            if i > 0:
-                # I can't figure out how to properly query github for a branch's commit
-                break
+        branch: Branch
+        for branch in branches:
+            if repo_data.branch and branch.name.lower() != repo_data.branch:
+                logger.info("branch %s is not the tracked one, continuing...", branch.name)
+                continue
 
             # branch_url = repo.branches_url.replace('{/branch}', branch.name)
             # branch_path = 'commits/{}'.format(branch.name)
-            # logger.info('getting commits of %s/%s', repo_name, branch.name)
+            logger.info('getting commits of %s/%s', repo_name, branch.name)
 
-            commits = repo.get_commits(since=from_date)
+            commits = repo.get_commits(since=from_date, sha=branch.commit.sha)
             logger.info('fetched %d total commits since %s (%d days ago)', len(list(commits)),
                         from_date.strftime("%Y-%m-%d %H:%M:%S"),
                         config.jobs.github.commits_days_backwards)
@@ -223,16 +224,16 @@ def commits_job(bot, _):
             for commit in reversed(commits):
                 # print(commit.url, commit.html_url)
                 try:
-                    Commit.get(Commit.repository == repo_name, Commit.branch == None, Commit.sha == commit.sha)
+                    Commit.get(Commit.repository == repo_name, Commit.sha == commit.sha)
                     logger.info('commit %s is already saved in db, continuing...', commit.sha)
                     continue
                 except DoesNotExist:
                     logger.info('commit %s is new, saving in db...', commit.sha)
-                    Commit.create(repository=repo_name, branch=None, sha=commit.sha)
+                    Commit.create(repository=repo_name, sha=commit.sha)
 
                 single_commit_text = NEW_COMMIT_STRING.format(
-                    repo_url=repo.html_url,
-                    repo_name=repo.full_name,
+                    branch_url='{}/tree/{}'.format(repo.html_url, branch.name),
+                    repo_name='{}/{}'.format(repo.full_name, branch.name),
                     commit_message=escape(commit.commit.message),
                     commit_url=commit.html_url,
                     commit_sha=commit.sha[:7],

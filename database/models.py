@@ -12,7 +12,7 @@ db = peewee.SqliteDatabase(config.database.filename, pragmas={'journal_mode': 'w
 
 class Commit(peewee.Model):
     repository = peewee.CharField()
-    branch = peewee.CharField(null=True)
+    # branch = peewee.CharField(null=True)  # no need for this: commits are fetched globally for the repo, so they have the same sha and we don't need to check the repo name
     sha = peewee.CharField(index=True)
 
     class Meta:
