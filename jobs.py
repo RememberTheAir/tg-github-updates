@@ -191,16 +191,12 @@ def commits_job(bot, _):
             logger.error('error while getting repo %s: %s', repo_name, str(e))
             continue
 
-        # if repo_data.branch:
-            # repo: Repository = repo.get_branch(repo_data.branch)
-
         branches: List[Branch] = list(repo.get_branches())
         branches_count = len(branches)
         if branches_count == 1:
             logger.info('repo has only one branch')
         else:
-            logger.info('repo has %d one branches: %s', branches_count, ', '.join([b.name for b in branches]))
-            # logger.info('branches urls: %s', repo.branches_url)
+            logger.info('repo has %d branches: %s', branches_count, ', '.join([b.name for b in branches]))
 
         branch: Branch
         for branch in branches:
@@ -208,8 +204,6 @@ def commits_job(bot, _):
                 logger.info("branch %s is not the tracked one, continuing...", branch.name)
                 continue
 
-            # branch_url = repo.branches_url.replace('{/branch}', branch.name)
-            # branch_path = 'commits/{}'.format(branch.name)
             logger.info('getting commits of %s/%s', repo_name, branch.name)
 
             commits = repo.get_commits(since=from_date, sha=branch.commit.sha)
@@ -222,7 +216,6 @@ def commits_job(bot, _):
             # reverse commits order
             commits: List[GithubCommit] = [commit for commit in commits]
             for commit in reversed(commits):
-                # print(commit.url, commit.html_url)
                 try:
                     Commit.get(Commit.repository == repo_name, Commit.sha == commit.sha)
                     logger.info('commit %s is already saved in db, continuing...', commit.sha)
