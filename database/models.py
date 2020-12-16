@@ -12,6 +12,7 @@ db = peewee.SqliteDatabase(config.database.filename, pragmas={'journal_mode': 'w
 
 class Commit(peewee.Model):
     repository = peewee.CharField()
+    branch = peewee.CharField(null=True)
     sha = peewee.CharField(index=True)
 
     class Meta:

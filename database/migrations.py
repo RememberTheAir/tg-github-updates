@@ -23,6 +23,7 @@ def main(db_filename):
 	post_id = peewee.IntegerField(null=True)
 	checked = peewee.BooleanField(default=False, null=True)
 	sent = peewee.BooleanField(default=False, null=True)
+	branch = peewee.CharField(null=True)
 
 	logger.info('Starting migration....')
 
@@ -30,8 +31,9 @@ def main(db_filename):
 		migrate(
 			migrator.add_column('Releases', 'added_on', added_on),
 			migrator.add_column('Releases', 'post_id', post_id),
-		    migrator.add_column('Releases', 'checked', checked),
-		    migrator.add_column('Releases', 'sent', sent)
+			migrator.add_column('Releases', 'checked', checked),
+			migrator.add_column('Releases', 'sent', sent),
+			migrator.add_column('Commits', 'branch', branch)
 		)
 	except (peewee.DatabaseError, sqlite3.DatabaseError):
 		print('database file {} is encrypted or is not a database'.format(db_filepath))
@@ -41,8 +43,7 @@ def main(db_filename):
 
 
 if __name__ == '__main__':
-	parser.add_argument("-db", "--database", action="store",
-		help="Database file path")
+	parser.add_argument("-db", "--database", action="store", help="Database file path")
 
 	args = parser.parse_args()
 	if not args.database:
