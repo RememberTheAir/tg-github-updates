@@ -200,8 +200,12 @@ def commits_job(bot, _):
 
         branch: Branch
         for branch in branches:
-            if repo_data.branch and branch.name.lower() != repo_data.branch:
+            if repo_data.branch and branch.name.lower() != repo_data.branch.lower():
                 logger.info("branch %s is not the tracked one, continuing...", branch.name)
+                continue
+
+            if repo_data.get('ignored_branches', None) and branch.name in repo_data.ignored_branches:
+                logger.info("branch %s is ignored, continuing...", branch.name)
                 continue
 
             logger.info('getting commits of %s/%s', repo_name, branch.name)

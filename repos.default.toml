@@ -1,6 +1,7 @@
 # [repos.description_key] # the description must be unique
 # path = "telegramdesktop/tdesktop" # github repo path
-# branch = false # branch name to fetch for commits. "false" will make the bot use the default one
+# branch = false # branch name to fetch for commits. "false" will make the bot check all branches
+# ignored_branches = [] # list of branches to ignore
 # hashtag = "tdesktop" # hashtag to attach to the message. If empty or null, no hashtag will be attached
 # commits = true # enable commits job for this repo
 # releases = true # enable releases job for this repo
@@ -143,6 +144,7 @@ chat_id = -1001109354447 # tgappsupdates
 [repos.treact]
 path = "evgeny-nadymov/telegram-react"
 branch = false
+ignored_branches = ["gh-pages"]
 hashtag = "webreact"
 commits = true
 releases = true
