@@ -74,6 +74,7 @@ chat_id = -1001109354447 # tgappsupdates
 [repos.tweb]
 path = "zhukov/webogram"
 branch = false
+ignored_branches = ["gh-pages"]
 hashtag = "webogram"
 commits = true
 releases = true
