@@ -104,7 +104,7 @@ chat_id = -1001109354447 # tgappsupdates
 
 [repos.tgcalls]
 path = "TelegramMessenger/tgcalls"
-branch = "tdesktop-calls"
+branch = false
 hashtag = "tgcalls"
 commits = true
 releases = true
