@@ -142,6 +142,28 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
+[repos.webk]
+path = "morethanwords/tweb"
+branch = false
+ignored_branches = ["gh-pages"]
+hashtag = "webk"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
+[repos.webz]
+path = "Ajaxy/telegram-tt"
+branch = false
+ignored_branches = ["gh-pages"]
+hashtag = "webz"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
 [repos.treact]
 path = "evgeny-nadymov/telegram-react"
 branch = false
