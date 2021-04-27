@@ -277,6 +277,17 @@ asset_files = true
 assets_timedelta = 600
 chat_id = -1001496311822 # newpipe
 
+[repos.newpipe_sponsorblock]
+path = "polymorphicshade/NewPipe"
+branch = false
+hashtag = ""
+commits = false
+releases = true
+assets = true
+asset_files = true
+assets_timedelta = 600
+chat_id = -1001151126987 # newpipe sponsorblock
+
 [repos.florisboard]
 path = "florisboard/florisboard"
 branch = false
