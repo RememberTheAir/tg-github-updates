@@ -16,6 +16,7 @@ from github.GithubException import UnknownObjectException
 from github import GitRelease
 from telegram.error import BadRequest
 from telegram.error import TelegramError
+from telegram import Bot
 from telegram import ParseMode
 from telegram import MAX_MESSAGE_LENGTH
 
@@ -482,3 +483,18 @@ JOBS_CALLBACKS = (
     assets_job,
     new_beta_job
 )
+
+
+def main():
+    bot = Bot(token=config.telegram.token)
+
+    for callback in JOBS_CALLBACKS:
+        callback(bot, ())  # errors are catched by the decorator
+
+
+if __name__ == "__main__":
+    from main import load_logging_config
+    load_logging_config()
+
+    main()
+

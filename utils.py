@@ -69,7 +69,7 @@ def logerrors(func):
         try:
             return func(bot, job, *args, **kwargs)
         except Exception as e:
-            logger.info('error while running job: %s', str(e), exc_info=True)
+            logger.error('error while running job: %s', str(e), exc_info=True)
             text = 'An error occurred while running a job: <code>{}</code>'.format(escape(str(e)))
             bot.send_message(config.telegram.admins[0], text, parse_mode=ParseMode.HTML)
 
