@@ -298,3 +298,14 @@ assets = true
 asset_files = true
 assets_timedelta = 600
 chat_id = -1001494875285 # @florisboard_github
+
+[repos.graphenecamera]
+path = "GrapheneOS/Camera"
+branch = false
+hashtag = ""
+commits = false
+releases = true
+assets = true
+asset_files = true
+assets_timedelta = 600
+chat_id = -1001648520537 # @grapheneos_camera_github
