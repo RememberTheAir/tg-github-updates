@@ -175,35 +175,35 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
-[repos.walletandroid]
-path = "ton-blockchain/wallet-android"
-branch = false
-hashtag = "walletandroid"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001399225876 # tonwallets
+# [repos.walletandroid]
+# path = "ton-blockchain/wallet-android"
+# branch = false
+# hashtag = "walletandroid"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001399225876 # tonwallets
 
-[repos.walletios]
-path = "ton-blockchain/wallet-ios"
-branch = false
-hashtag = "walletios"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001399225876 # tonwallets
+# [repos.walletios]
+# path = "ton-blockchain/wallet-ios"
+# branch = false
+# hashtag = "walletios"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001399225876 # tonwallets
 
-[repos.walletdesktop]
-path = "ton-blockchain/wallet-desktop"
-branch = false
-hashtag = "walletdesktop"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001399225876 # tonwallets
+# [repos.walletdesktop]
+# path = "ton-blockchain/wallet-desktop"
+# branch = false
+# hashtag = "walletdesktop"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001399225876 # tonwallets
 
 [repos.nekogram]
 path = "Nekogram/Android"
