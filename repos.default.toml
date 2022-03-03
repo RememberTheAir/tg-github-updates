@@ -92,15 +92,15 @@ chat_id = -1001109354447 # tgappsupdates
 # asset_files = false
 # chat_id = -1001109354447 # tgappsupdates
 
-[repos.libtgvoip]
-path = "grishka/libtgvoip"
-branch = false
-hashtag = "libtgvoip"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001109354447 # tgappsupdates
+# [repos.libtgvoip]
+# path = "grishka/libtgvoip"
+# branch = false
+# hashtag = "libtgvoip"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001109354447 # tgappsupdates
 
 [repos.tgcalls]
 path = "TelegramMessenger/tgcalls"
