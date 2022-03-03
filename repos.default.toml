@@ -71,26 +71,26 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
-[repos.tweb]
-path = "zhukov/webogram"
-branch = false
-ignored_branches = ["gh-pages"]
-hashtag = "webogram"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001109354447 # tgappsupdates
+# [repos.tweb]
+# path = "zhukov/webogram"
+# branch = false
+# ignored_branches = ["gh-pages"]
+# hashtag = "webogram"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001109354447 # tgappsupdates
 
-[repos.wpapp]
-path = "wodim/telegram-wp"
-branch = false
-hashtag = "telegram_wp"
-commits = true
-releases = true
-assets = false
-asset_files = false
-chat_id = -1001109354447 # tgappsupdates
+# [repos.wpapp]
+# path = "wodim/telegram-wp"
+# branch = false
+# hashtag = "telegram_wp"
+# commits = true
+# releases = true
+# assets = false
+# asset_files = false
+# chat_id = -1001109354447 # tgappsupdates
 
 [repos.libtgvoip]
 path = "grishka/libtgvoip"
