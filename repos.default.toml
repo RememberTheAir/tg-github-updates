@@ -205,16 +205,16 @@ chat_id = -1001109354447 # tgappsupdates
 # asset_files = false
 # chat_id = -1001399225876 # tonwallets
 
-[repos.nekogram]
-path = "Nekogram/Android"
-branch = false
-hashtag = ""
-commits = true
-releases = true
-assets = true
-asset_files = true
-assets_timedelta = 300
-chat_id = -1001187572963 # nekogram_releases
+# [repos.nekogram]
+# path = "Nekogram/Android"
+# branch = false
+# hashtag = ""
+# commits = true
+# releases = true
+# assets = true
+# asset_files = true
+# assets_timedelta = 300
+# chat_id = -1001187572963 # nekogram_releases
 
 [repos.forkgram]
 path = "Forkgram/TelegramAndroid"
