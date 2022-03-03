@@ -209,6 +209,10 @@ def commits_job(bot, _):
                 logger.info("branch %s is ignored, continuing...", branch.name)
                 continue
 
+            if branch.name.startswith("dependabot"):
+                logger.info("ignoring branch %s: dependabot branch", branch.name)
+                continue
+
             logger.info('getting commits of %s/%s', repo_name, branch.name)
 
             commits = repo.get_commits(since=from_date, sha=branch.commit.sha)
