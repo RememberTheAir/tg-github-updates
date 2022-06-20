@@ -31,6 +31,16 @@ assets = false
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
+[repos.tgxandroid]
+path = "TGX-Android/Telegram-X"
+branch = false
+hashtag = "tgxandroid"
+commits = true
+releases = true
+assets = false
+asset_files = false
+chat_id = -1001109354447 # tgappsupdates
+
 [repos.iosapp]
 path = "TelegramMessenger/Telegram-iOS"
 branch = false
