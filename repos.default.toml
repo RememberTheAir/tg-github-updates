@@ -319,3 +319,14 @@ assets = true
 asset_files = true
 assets_timedelta = 600
 chat_id = -1001648520537 # @grapheneos_camera_github
+
+[repos.tlscheme]
+path = "TelegramPlayGround/tg-api-spec-s"
+branch = "data"
+hashtag = ""
+commits = true
+releases = false
+assets = false
+asset_files = false
+assets_timedelta = 600
+chat_id = -1001809701622 # private channel, https://t.me/+ghEYmeOnMb42MTZk
