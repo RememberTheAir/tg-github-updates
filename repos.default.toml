@@ -21,15 +21,15 @@ assets = true
 asset_files = false
 chat_id = -1001109354447 # tgappsupdates
 
-[repos.tdx]
-path = "telegramdesktop/tdx"
-branch = false
-hashtag = "tdx"
-commits = true
-releases = true
-assets = true
-asset_files = false
-chat_id = -1001109354447 # tgappsupdates
+#[repos.tdx]
+#path = "telegramdesktop/tdx"
+#branch = false
+#hashtag = "tdx"
+#commits = true
+#releases = true
+#assets = true
+#asset_files = false
+#chat_id = -1001109354447 # tgappsupdates
 
 [repos.androidapp]
 path = "DrKLO/Telegram"
