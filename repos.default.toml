@@ -5,6 +5,7 @@
 # hashtag = "tdesktop" # hashtag to attach to the message. If empty or null, no hashtag will be attached
 # commits = true # enable commits job for this repo
 # releases = true # enable releases job for this repo
+# release_changelog = true # wether to include the release's changelog or not in the message
 # assets = true # send the assets urls for each posted release
 # asset_files = false # send the assets files for each posted release. Ignored if "assets" is false
 # assets_timedelta = 1800 # time to wait after a github release before sending the assets

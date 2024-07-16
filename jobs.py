@@ -148,10 +148,14 @@ def releases_job(bot, _):
 
         assets_list_text = '\n'.join(assets_urls_list)
 
+        release_body = ""
+        if "release_changelog" not in repo_data or repo_data.release_changelog:
+            release_body = f"\n{escape(release.body[:3000])}"
+
         text = NEW_RELEASE_STRING.format(
             release_url=release.html_url,
             release_tag=release.tag_name,
-            release_body='\n' + release.body if release.body else '',
+            release_body=release_body,
             repo_name=repo.full_name,
             channel='beta' if release.prerelease else 'stable',
             assets_download=assets_list_text,
