@@ -298,7 +298,7 @@ assets_timedelta = 600
 chat_id = -1001496311822 # newpipe
 
 [repos.newpipe_sponsorblock]
-path = "polymorphicshade/NewPipe"
+path = "polymorphicshade/Tubular"
 branch = false
 hashtag = ""
 commits = false
