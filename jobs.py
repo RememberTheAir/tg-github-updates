@@ -240,7 +240,7 @@ def commits_job(bot, _):
                 single_commit_text = NEW_COMMIT_STRING.format(
                     branch_url='{}/tree/{}'.format(repo.html_url, branch.name),
                     repo_name='{}/{}'.format(repo.full_name, branch.name),
-                    commit_message=escape(commit.commit.message),
+                    commit_message=escape(commit.commit.message.split("\n")[0]),
                     commit_url=commit.html_url,
                     commit_sha=commit.sha[:7],
                     # use only the first 7 characters
