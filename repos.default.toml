@@ -33,7 +33,7 @@ chat_id = -1001109354447 # tgappsupdates
 #chat_id = -1001109354447 # tgappsupdates
 
 [repos.androidapp]
-path = "DrKLO/Telegram"
+path = "TelegramMessenger/Telegram"
 branch = false
 hashtag = "android"
 commits = true
